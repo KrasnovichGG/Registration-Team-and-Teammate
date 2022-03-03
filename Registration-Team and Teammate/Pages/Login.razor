@@ -1,0 +1,58 @@
+﻿@page "/login"
+@inject NavigationManager NavigationManager
+
+<h1>Залогинься брат!</h1>
+
+
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">Введите свои данные!</h3>
+        <form>
+            <div class="mb-3">
+                <label for="Login" class="form-label">Логин для регистрации в приложении</label>
+                <input type="text" class="form-control" id="Login" placeholder="Введите свой оригинальный пост" aria-describedby="loginHelp">
+            </div>
+            <div class="mb-3">
+                <label for="NameHuman" class="form-label">Имя</label>
+                <input type="text" id="NameHuman" class="form-control" placeholder="Ваш имя должно состоять из 1-10 символов, содержать только буквы" aria-describedby="nameHelp">
+            </div>
+            <div class="mb-3">
+                <label for="SurnameHuman" class="form-label">Фамилия</label>
+                <input type="text" id="SurnameHuman" class="form-control" placeholder="Ваша фамилия должна состоять из 1-10 символов, содержать только буквы" aria-describedby="surnameHelp">
+            </div>
+            <div class="mb-3">
+                <label for="Email" class="form-label">Ваша почта</label>
+                <input type="email" id="Email" class="form-control" placeholder="Ваша почта должна состоять из 8-20 символов, содержать буквы и цифры и не должен содержать пробелов, или эмодзи." aria-describedby="EmailHelp">
+            </div>
+            <button type="submit" id="btnadd" class="btn btn-primary">Зарегистрироваться</button>
+            <input id="btnadd" type="color" />
+        </form>
+    </div>
+</div>
+
+@code {
+
+    //private LoginModel loginModel = new LoginModel();
+    //private bool ShowErrors;
+    //private string Error = "";
+
+    //private async Task HandleLogin()
+    //{
+    //    ShowErrors = false;
+
+    //    var result = await AuthService.Login(loginModel);
+
+    //    if (result.Successful)
+    //    {
+    //        NavigationManager.NavigateTo("/");
+    //    }
+    //    else
+    //    {
+    //        Error = result.Error;
+    //        ShowErrors = true;
+    //    }
+    //}
+    public string Email { get; set; }
+    public string Password { get; set; }
+
+}
