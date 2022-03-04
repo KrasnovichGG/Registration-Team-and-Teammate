@@ -1,0 +1,17 @@
+﻿@page "/userslist"
+@inject NavigationManager NavigationManager
+
+<h3>Пользователи которые зарегистрированы в программу!</h3>
+<div class="col-3">
+    @foreach (var item in qw)
+    {
+        <button type="button" class="list-group-item list-group-item-action">@MyProperty . Зарегистрированный юзер...</button>
+        MyProperty++;
+    }
+</div>
+
+@code {
+    public int MyProperty { get; set; } = 1;
+    List<string> qw = new List<string>() { "fe", "", "", "", "", "", "", "", "" };
+
+}
