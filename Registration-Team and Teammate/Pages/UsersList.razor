@@ -2,16 +2,32 @@
 @inject NavigationManager NavigationManager
 
 <h3>Пользователи которые зарегистрированы в программу!</h3>
-<div class="col-3">
-    @foreach (var item in qw)
-    {
-        <button type="button" class="list-group-item list-group-item-action">@MyProperty . Зарегистрированный юзер...</button>
-        MyProperty++;
-    }
-</div>
+<div class="container overflow-hidden px-4">
+    
+  <div class="row gx-5">
+    <div class="col-5">
+          @foreach (var item in listusers)
+            {
+                <button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Нажмите чтобы редактировать!" class="list-group-item list-group-item-action btn btn-outline-warning">@MyUsers. Зарегистрированный юзер...</button>
+                MyUsers++;
+            }
+     @*<div class="p-3 border bg-light">Пользовательские внутренние отступы колонок</div>*@
+    </div>
+     <div class="m-5">
+      <h3>Команды,в которые можно попасть!</h3>
+      @foreach (var item in listteam)
+            {
 
+                <button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Нажмите чтобы редактировать или добавить игрока!" class="list-group-item list-group-item-action btn btn-outline-info">@MyTeam. Команды...</button>
+                MyTeam++; ;
+            }
+    </div>
+  </div>
+   </div>
 @code {
-    public int MyProperty { get; set; } = 1;
-    List<string> qw = new List<string>() { "fe", "", "", "", "", "", "", "", "" };
+    public int MyUsers { get; set; } = 1;
+    public int MyTeam { get; set; } = 1;
+    List<string> listteam = new List<string>() { "fe", "", "", "", "", "", "", "", "" };
+    List<string> listusers = new List<string>() { "fe", "", "", "", "", "", "", "", "" };
 
 }
