@@ -1,35 +1,84 @@
 ﻿@page "/userslist"
 @inject NavigationManager NavigationManager
 
-<h3>Пользователи которые зарегистрированы в программу!</h3>
-<div class="container overflow-hidden px-4">
-    
-  <div class="row gx-5">
+<h3>Регистрация в программе!</h3>
+<div class="row">
     <div class="col-5">
-          @foreach (var item in listusers)
-            {
-                <button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Нажмите чтобы редактировать!" class="list-group-item list-group-item-action btn btn-outline-warning">@MyUsers. Зарегистрированный юзер...</button>
-                MyUsers++;
-            }
-            <button type="button" class="btn btn-danger">Обновить список</button>
-     @*<div class="p-3 border bg-light">Пользовательские внутренние отступы колонок</div>*@
+        <h3>Пользователи</h3>
+        @foreach (var item in listusers)
+        {
+            <button type="button"  data-bs-toggle="tooltip" data-bs-placement="top" title="Нажмите чтобы редактировать!" class="list-group-item list-group-item-action btn btn-outline-warning">@MyUsers. @item.Name @item.Surname,Логин:@item.Login</button>
+            MyUsers++;
+        }
+        
+        <button type="button" @onclick="(()=>OnInitialized())"  class="btn btn-danger">Обновить список</button>
     </div>
-     <div class="m-5">
-      <h3>Команды,в которые можно попасть!</h3>
-      @foreach (var item in listteam)
-            {
+    <div class="col-4">
+        <h3>Команды!</h3>
+        @foreach (var item in listteam)
+        {
+            <button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Нажмите чтобы редактировать или добавить игрока!" class="list-group-item list-group-item-action btn btn-outline-info">@MyTeam. Команды...</button>
+            MyTeam++; ;
+        }
+        <button type="button" class="btn btn-success">Добавить команду!</button>
+    </div>
+</div>
+<div class="mt-4 col-7">
+    <h3>Редактирование и добавление новой команды!</h3>
+    <div class="list-group">
+        <input type="text" class="list-group-item list-group-item-action" @bind="User1.Login" />
+        <input type="text" class="list-group-item list-group-item-action" @bind="User2.Login" />
+        <input type="text" class="list-group-item list-group-item-action" @bind="User3.Login" />
+        <input type="text" class="list-group-item list-group-item-action" @bind="User4.Login" />
+        <input type="text" class="list-group-item list-group-item-action" @bind="User5.Login" />
+    </div>
+    <div class="p-2">
+        <button type="button" class="btn btn-success">Добавить нового игрока</button>
+        <button type="button" class="btn btn-danger">Удалить игрока</button>
+        <button type="button" @onclick=RandomBtn class="btn btn-warning">Рандомное заполнение</button>
+        <button type="button" class="btn btn-info">Обновить команду</button>
+    </div>
+</div>
 
-                <button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Нажмите чтобы редактировать или добавить игрока!" class="list-group-item list-group-item-action btn btn-outline-info">@MyTeam. Команды...</button>
-                MyTeam++; ;
-            }
-            <button type="button" class="btn btn-success">Добавить команду!</button>
-    </div>
-  </div>
-   </div>
 @code {
     public int MyUsers { get; set; } = 1;
     public int MyTeam { get; set; } = 1;
     List<string> listteam = new List<string>() { "fe", "", "", "", "", "", "", "", "" };
-    List<string> listusers = new List<string>() { "fe", "", "", "", "", "", "", "", "" };
 
+    List<LoginModel> listusers = new List<LoginModel>();
+    LoginModel User1 { get; set; }
+    LoginModel User2 { get; set; }
+    LoginModel User3 { get; set; }
+    LoginModel User4 { get; set; }
+    LoginModel User5 { get; set; }
+    protected override void OnInitialized()
+    {
+        MyUsers = 1;
+        MyTeam = 1;
+        listusers = LoginModel.TakeList();
+        base.OnInitialized();
+    }
+    public  void RandomBtn()
+    {
+        Random randombnt = new Random();
+
+        User1 = listusers[randombnt.Next(0, listusers.Count)];
+        if (listusers[randombnt.Next(0, listusers.Count)].Login != User1.Login)
+        {
+            User2 = listusers[randombnt.Next(0, listusers.Count)];
+        }
+        if(listusers[randombnt.Next(0, listusers.Count)].Login != User2.Login)
+        {
+            User3 = listusers[randombnt.Next(0, listusers.Count)];
+        }
+        if(listusers[randombnt.Next(0, listusers.Count)].Login != User3.Login)
+        {
+            User4 = listusers[randombnt.Next(0, listusers.Count)];
+        }
+        if(listusers[randombnt.Next(0, listusers.Count)].Login != User4.Login)
+        {
+            User5 = listusers[randombnt.Next(0, listusers.Count)];
+        }
+        User5 = listusers[randombnt.Next(0, listusers.Count)];
+    }
 }
