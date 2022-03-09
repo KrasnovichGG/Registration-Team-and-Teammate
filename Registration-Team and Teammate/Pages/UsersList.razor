@@ -46,39 +46,86 @@
     List<string> listteam = new List<string>() { "fe", "", "", "", "", "", "", "", "" };
 
     List<LoginModel> listusers = new List<LoginModel>();
-    LoginModel User1 { get; set; }
-    LoginModel User2 { get; set; }
-    LoginModel User3 { get; set; }
-    LoginModel User4 { get; set; }
-    LoginModel User5 { get; set; }
+    LoginModel User1 { get; set; } = new LoginModel("No", "People", "No", "No People");
+    LoginModel User2 { get; set; } = new LoginModel("No", "People", "No", "No People");
+    LoginModel User3 { get; set; } = new LoginModel("No", "People", "No", "No People");
+    LoginModel User4 { get; set; } = new LoginModel("No", "People", "No", "No People");
+    LoginModel User5 { get; set; } = new LoginModel("No", "People", "No", "No People");
+
     protected override void OnInitialized()
     {
         MyUsers = 1;
         MyTeam = 1;
         listusers = LoginModel.TakeList();
+        RandomBtn();
         base.OnInitialized();
     }
     public  void RandomBtn()
     {
-        Random randombnt = new Random();
+        User1 = new LoginModel("No", "People", "No", "No People");
+        User2 = new LoginModel("No", "People", "No", "No People");
+        User3 = new LoginModel("No", "People", "No", "No People");
+        User4 = new LoginModel("No", "People", "No", "No People");
+        User5 = new LoginModel("No", "People", "No", "No People");
 
-        User1 = listusers[randombnt.Next(0, listusers.Count)];
-        if (listusers[randombnt.Next(0, listusers.Count)].Login != User1.Login)
+        Random rnd = new Random();
+
+        if(listusers.Count == 1)
         {
-            User2 = listusers[randombnt.Next(0, listusers.Count)];
-        }
-        if(listusers[randombnt.Next(0, listusers.Count)].Login != User2.Login)
+            User1 = listusers[0];
+        } 
+        if(listusers.Count == 2)
         {
-            User3 = listusers[randombnt.Next(0, listusers.Count)];
+            User1 = listusers[0];
+            User2 = listusers[1];
         }
-        if(listusers[randombnt.Next(0, listusers.Count)].Login != User3.Login)
+        if(listusers.Count == 3)
         {
-            User4 = listusers[randombnt.Next(0, listusers.Count)];
+            User1 = listusers[0];
+            User2 = listusers[1];
+            User3 = listusers[2];
         }
-        if(listusers[randombnt.Next(0, listusers.Count)].Login != User4.Login)
+        if(listusers.Count == 4)
         {
-            User5 = listusers[randombnt.Next(0, listusers.Count)];
+            User1 = listusers[0];
+            User2 = listusers[1];
+            User3 = listusers[2];
+            User4 = listusers[3];
         }
-        User5 = listusers[randombnt.Next(0, listusers.Count)];
+        if(listusers.Count == 5)
+        {
+            User1 = listusers[0];
+            User2 = listusers[1];
+            User3 = listusers[2];
+            User4 = listusers[3];
+            User5 = listusers[4];
+        }
+        if(listusers.Count > 5)
+        {
+            int a = 0;
+            User1 = listusers[0];
+            while(User1.id == listusers[a].id)
+            {
+                a = rnd.Next(0, listusers.Count);
+            } 
+            User2 = listusers[a];
+            while(User2.id == listusers[a].id || User1.id == listusers[a].id)
+            {
+                a = rnd.Next(0, listusers.Count);
+            }     
+            User3 = listusers[a];
+            while(User3.id == listusers[a].id || User2.id == listusers[a].id || User1.id == listusers[a].id)
+            {
+                a = rnd.Next(0, listusers.Count);
+            }     
+            User4 = listusers[a];
+            while(User4.id == listusers[a].id || User3.id == listusers[a].id || User2.id == listusers[a].id || User1.id == listusers[a].id)
+            {
+                a = rnd.Next(0, listusers.Count);
+            }     
+            User5 = listusers[a];
+        }
+        MyUsers = 1;
+        MyTeam = 1;
     }
 }
