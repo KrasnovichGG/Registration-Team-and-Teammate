@@ -17,16 +17,16 @@
         <h3>Команды!</h3>
         @foreach (var item in listteam)
         {
-            <button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Нажмите чтобы редактировать или добавить игрока!" class="list-group-item list-group-item-action btn btn-outline-info">@MyTeam. Команды...</button>
+            <button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Нажмите чтобы редактировать или добавить игрока!" class="list-group-item list-group-item-action btn btn-outline-info">@MyTeam. @item.Name</button>
             MyTeam++; ;
         }
-        <button type="button" @onclick=CreateTeam class="btn btn-success">Добавить команду!</button>
+        <button type="submit" @onclick=CreateTeam class="btn btn-success">Добавить команду!</button>
     </div>
 </div>
 <div class="mt-4 col-7">
     <h3>Редактирование и добавление новой команды!</h3>
     <div class="list-group">
-        <input type="text" class="list-group-item list-group-item-action" @bind="newteams.Name" />
+        <input type="text" class="list-group-item list-group-item-action" placeholder="Введите название вашей команды!" @bind="Name" />
         <input type="text" disabled=true class="list-group-item list-group-item-action" @bind="User1.Login" />
         <input type="text" disabled=true class="list-group-item list-group-item-action" @bind="User2.Login" />
         <input type="text" disabled=true class="list-group-item list-group-item-action" @bind="User3.Login" />
@@ -48,7 +48,7 @@
 
 
     Team newteams;
-    List<string> listteam = new List<string>() { "fe", "", "", "", "", "", "", "", "" };
+    List<Team> listteam;
 
     List<LoginModel> listusers = new List<LoginModel>();
     LoginModel User1 { get; set; } = new LoginModel("No", "People", "No", "No People");
@@ -59,7 +59,11 @@
 
     public void CreateTeam()
     {
-        
+        Team team = new Team(Name,new List<LoginModel>() {User1,User2,User3,User4,User5 });
+        team.Addteam(team);
+        MyUsers = 1;
+        MyTeam = 1;
+        OnInitialized();
     }
 
     protected override void OnInitialized()
@@ -68,6 +72,7 @@
         MyTeam = 1;
         newteams = new Team(Name, new List<LoginModel>() { User1, User2, User3, User4, User5 });
         listusers = LoginModel.TakeList();
+        listteam = Team.TakeTeamsList();
         RandomBtn();
         base.OnInitialized();
     }
