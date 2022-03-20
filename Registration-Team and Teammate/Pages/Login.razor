@@ -1,5 +1,6 @@
 ﻿@page "/login"
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JsRuntime
 
 <h1>Залогинься брат!</h1>
 
@@ -28,16 +29,31 @@
         </form>
     </div>
 </div>
+@*<div @bind-Visible = "@visible">
 
+</div>
+*@
 @code {
     string Name { get; set; }
     string Surname { get; set; }
     string Loogin { get; set; }
     string Email { get; set; }
+    bool visible = false;
 
-    public void BtnAdd()
+    public  void BtnAdd()
     {
-        LoginModel loginMODEL = new LoginModel(Name, Surname, Email, Loogin);
-        loginMODEL.Add(loginMODEL);
+        bool hui = false;
+        foreach (var item in LoginModel.TakeList())
+        {
+            if (item.Login == Loogin)
+            {
+                hui = true;
+                break;
+            }
+        }
+        if (!hui)
+            LoginModel.Add(new LoginModel(Name, Surname, Email, Loogin));
+            
+          
     }
 }

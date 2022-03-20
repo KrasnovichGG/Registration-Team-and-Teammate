@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Driver.Builders;
 
 namespace Registration_Team_and_Teammate.Shared
 {
@@ -17,7 +18,6 @@ namespace Registration_Team_and_Teammate.Shared
             Email = email;
             Login = login;
         }
-
         [BsonIgnoreIfDefault]
         [BsonId]
         public ObjectId id { get; set; }
@@ -29,7 +29,7 @@ namespace Registration_Team_and_Teammate.Shared
         public string Email { get; set; }
         [BsonElement]
         public string Login { get; set; }
-        public void Add(LoginModel login)
+        public static void Add(LoginModel login)
         {
             MongoClient client = new MongoClient(); // чтобы подключится к серверу надо передать в качестве аргумента {uri}
             var db = client.GetDatabase("Users");
